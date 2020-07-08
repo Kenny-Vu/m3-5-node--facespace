@@ -48,7 +48,7 @@ const handleProfilePage = (req, res) => {
 //sign in page
 const handleSignin = (req, res) => {
   if (currentUser._id) {
-    res.redirect("../");
+    res.redirect(`../users/${currentUser._id}`);
   } else {
     res.render("pages/signin", { currentUser });
   }
