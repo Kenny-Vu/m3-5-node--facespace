@@ -41,7 +41,24 @@ const handleProfilePage = (req, res) => {
     res.status(404).send("I couldn't find what you're looking for.");
   }
 };
-
+//sign in page
+const handleSignin = (req, res) => {
+  res.render("pages/signin", {});
+};
+// sign in function
+const handleName = (req, res) => {
+  const firstName = req.body.firstName;
+  let match = users.find((user) => {
+    return user.name === firstName;
+  });
+  if (match) {
+    res.status(200);
+    res.redirect(`/users/${match._id}`);
+  } else {
+    res.status(400);
+    res.redirect("/signin");
+  }
+};
 // -----------------------------------------------------
 // server endpoints
 express()
@@ -53,6 +70,8 @@ express()
   // endpoints
   .get("/", handleHomepage)
   .get("/users/:id", handleProfilePage)
+  .get("/signin", handleSignin)
+  .post("/getname", handleName)
   // a catchall endpoint that will send the 404 message.
   .get("*", handleFourOhFour)
 

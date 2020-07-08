@@ -1,0 +1,14 @@
+<%- include('../partials/header') %>
+<div class="signin-page">
+  <form method="post" action="/getname" class="signin-page__form">
+    <label for="firstName" class="signin-page__form--label">First name</label>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="Your first name"
+      class="signin-page__form--input"
+    />
+    <button type="submit" class="signin-page__form--button">Submit</button>
+  </form>
+</div>
+<%- include('../partials/footer') %>
