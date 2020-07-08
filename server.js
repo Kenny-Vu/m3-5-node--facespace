@@ -14,7 +14,7 @@ const handleFourOhFour = (req, res) => {
 // homepage
 const handleHomepage = (req, res) => {
   res.status(200);
-  res.render("pages/homepage", { users: users });
+  res.render("pages/homepage", { users, currentUser });
 };
 // user page
 const handleProfilePage = (req, res) => {
@@ -35,15 +35,18 @@ const handleProfilePage = (req, res) => {
         }
       });
     });
-    console.log(friendList);
-    res.render("pages/profile", { user, friendList });
+    res.render("pages/profile", {
+      user,
+      friendList,
+      currentUser,
+    });
   } else {
     res.status(404).send("I couldn't find what you're looking for.");
   }
 };
 //sign in page
 const handleSignin = (req, res) => {
-  res.render("pages/signin", {});
+  res.render("pages/signin", { currentUser });
 };
 // sign in function
 const handleName = (req, res) => {
@@ -52,6 +55,7 @@ const handleName = (req, res) => {
     return user.name === firstName;
   });
   if (match) {
+    currentUser = match;
     res.status(200);
     res.redirect(`/users/${match._id}`);
   } else {
