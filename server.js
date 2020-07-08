@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const { users } = require("./data/users");
 
 let currentUser = {};
+let friendsIds = [];
 
 // declare the 404 function
 const handleFourOhFour = (req, res) => {
@@ -14,11 +15,12 @@ const handleFourOhFour = (req, res) => {
 // homepage
 const handleHomepage = (req, res) => {
   res.status(200);
-  res.render("pages/homepage", { users, currentUser });
+  res.render("pages/homepage", { users, currentUser, friendsIds });
 };
 // user page
 const handleProfilePage = (req, res) => {
   const id = req.params.id;
+  const friendList = [];
   let index = null;
   users.forEach((user) => {
     if (id === user._id) {
@@ -27,7 +29,6 @@ const handleProfilePage = (req, res) => {
   });
   if (index !== null) {
     const user = users[index];
-    const friendList = [];
     users.forEach((possibleFriend) => {
       user.friends.forEach((friend) => {
         if (friend === possibleFriend._id) {
@@ -56,6 +57,10 @@ const handleName = (req, res) => {
   });
   if (match) {
     currentUser = match;
+    match.friends.forEach((friend) => {
+      friendsIds.push(friend);
+    });
+    console.log(friendsIds);
     res.status(200);
     res.redirect(`/users/${match._id}`);
   } else {

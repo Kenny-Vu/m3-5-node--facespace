@@ -6,6 +6,9 @@
             <% users.forEach(user =>{ %>
                 <li class="homepage__all--user">
                     <a href="<%-`./users/${user._id}`%>"><img src="<%- user.avatarUrl %>" alt=""></a> 
+                    <div class=<%- friendsIds.includes(user._id)? 'ribbon': '' %>>
+                        <span><%- friendsIds.includes(user._id)? 'Friends!': '' %></span> 
+                    </div>
                 </li>
            <% }) %>
         </ul>
