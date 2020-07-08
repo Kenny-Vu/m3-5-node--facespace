@@ -47,7 +47,11 @@ const handleProfilePage = (req, res) => {
 };
 //sign in page
 const handleSignin = (req, res) => {
-  res.render("pages/signin", { currentUser });
+  if (currentUser._id) {
+    res.redirect("../");
+  } else {
+    res.render("pages/signin", { currentUser });
+  }
 };
 // sign in function
 const handleName = (req, res) => {
