@@ -72,6 +72,12 @@ const handleName = (req, res) => {
     res.redirect("/signin");
   }
 };
+//sign out function
+const handleSignOut = (req, res) => {
+  currentUser = {};
+  friendsIds = [];
+  res.redirect("/");
+};
 // -----------------------------------------------------
 // server endpoints
 express()
@@ -85,6 +91,7 @@ express()
   .get("/users/:id", handleProfilePage)
   .get("/signin", handleSignin)
   .post("/getname", handleName)
+  .get("/signout", handleSignOut)
   // a catchall endpoint that will send the 404 message.
   .get("*", handleFourOhFour)
 

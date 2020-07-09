@@ -9,6 +9,7 @@
   <header class="header">
       <h1 class='site-title'><a href="../">Facespace</a></h1>
       <p>
-          <a class="signin-button" href="../signin"><%-currentUser.name? `Hola ${currentUser.name}!`: 'sign in'%></a>
+        <a class="signin-button" href="../signin"><%-currentUser.name? `Hola ${currentUser.name}!`: 'sign in'%></a>
+        <a class="signin-button" href="../signout"><%-currentUser.name? `Sign out`: ''%></a>
       </p>
   </header>
