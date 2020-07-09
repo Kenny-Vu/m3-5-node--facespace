@@ -10,6 +10,7 @@ const {
   handleProfilePage,
   handleSignin,
   handleSignOut,
+  handleAddFriend,
 } = require("./data/handlers");
 
 // -----------------------------------------------------
@@ -26,6 +27,7 @@ express()
   .get("/signin", handleSignin)
   .post("/getname", handleName)
   .get("/signout", handleSignOut)
+  .get("/addfriend/:id", handleAddFriend)
   // a catchall endpoint that will send the 404 message.
   .get("*", handleFourOhFour)
 

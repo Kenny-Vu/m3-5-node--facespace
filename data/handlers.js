@@ -13,7 +13,8 @@ const handleHomepage = (req, res) => {
 };
 // user page
 const handleProfilePage = (req, res) => {
-  const id = req.params.id;
+  let id = req.params.id;
+  currentIdVisit = id;
   const friendList = [];
   let index = null;
   users.forEach((user) => {
@@ -34,6 +35,8 @@ const handleProfilePage = (req, res) => {
       user,
       friendList,
       currentUser,
+      currentIdVisit,
+      id,
     });
   } else {
     res.status(404).send("I couldn't find what you're looking for.");
@@ -58,7 +61,6 @@ const handleName = (req, res) => {
     match.friends.forEach((friend) => {
       friendsIds.push(friend);
     });
-    console.log(friendsIds);
     res.status(200);
     res.redirect(`/users/${match._id}`);
   } else {
@@ -72,12 +74,37 @@ const handleSignOut = (req, res) => {
   friendsIds = [];
   res.redirect("/");
 };
-
+//logic to add BFF <3
+const handleAddFriend = (req, res) => {
+  let profileId = req.params.id;
+  console.log(profileId);
+  //if user is signed in, currentUser should have the name property
+  if (currentUser.name) {
+    let alreadyFriends = currentUser.friends.some((friend) => {
+      return friend === profileId;
+    });
+    console.log(alreadyFriends);
+    if (alreadyFriends) {
+      let newFriends = currentUser.friends.filter((friend) => {
+        return friend !== profileId;
+      });
+      currentUser.friends = newFriends;
+      friendsIds = newFriends;
+    } else {
+      friendsIds.push(profileId);
+      currentUser.friends.push(profileId);
+    }
+  }
+  res.redirect(`../users/${profileId}`);
+};
 module.exports = {
+  currentUser,
+  friendsIds,
   handleFourOhFour,
   handleHomepage,
   handleName,
   handleProfilePage,
   handleSignin,
   handleSignOut,
+  handleAddFriend,
 };

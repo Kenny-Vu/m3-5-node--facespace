@@ -1,9 +1,39 @@
-@import 'settings/reset.css';
-@import 'settings/typography.css';
-@import 'settings/variables.css';
-@import 'components/header.css';
-@import 'components/homepage.css';
-@import 'components/signin-form.css';
-@import 'components/profile-page.css';
+@import "settings/reset.css";
+@import "settings/typography.css";
+@import "settings/variables.css";
+@import "components/header.css";
+@import "components/homepage.css";
+@import "components/signin-form.css";
+@import "components/profile-page.css";
 
 /* Place any custom CSS below. 😃 */
+
+/* button to add bff */
+.add-friend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  height: 50px;
+  width: 100px;
+  padding: 0.5rem;
+  border: none;
+  color: #fff;
+}
+.add-friend a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.add-friend:hover {
+  transform: scale(1.1);
+  background-color: #fff;
+  color: var(--primary-color);
+  border: solid var(--primary-color);
+  transition-duration: 0.2s;
+}
+.add-friend:hover > a {
+  transform: scale(1.1);
+  color: var(--primary-color);
+  transition-duration: 0.2s;
+}
