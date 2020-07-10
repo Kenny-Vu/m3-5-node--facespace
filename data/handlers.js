@@ -98,14 +98,12 @@ const handleAddFriend = (req, res) => {
       friendsIds = currentUser.friends.filter((friend) => {
         return friend !== profileId;
       });
-      //we have to update the user object from the users array as well
+      //we have to update the user object from the users array
       users[currentUserIndex].friends = friendsIds;
-      console.log(currentUser.friends);
-      console.log(friendsIds);
 
       //if not friends yet, then add as friend
     } else {
-      friendsIds.push(profileId);
+      //since currentUser is a reference to the user object in users array, we only need to update this variable
       currentUser.friends.push(profileId);
     }
   }
